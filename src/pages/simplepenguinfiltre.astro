@@ -1,0 +1,39 @@
+<div id="myplot"></div>
+<select name="species" id="species">
+    <option value="">Toutes les espèces</option>
+    <option value="Adelie">Adelie</option>
+    <option value="Chinstrap">Chinstrap</option>
+    <option value="Gentoo">Gentoo</option>
+</select>
+<script>
+
+import penguins from "../assets/penguins.json";
+import * as Plot from "@observablehq/plot";
+
+const selectSpecies= document.querySelector('#species');
+console.log(selectSpecies);
+
+function renderPlot(){
+    const species = selectSpecies.value;
+    const div = document.querySelector("#myplot");
+    div.innerHTML = "";
+    const plot = Plot.plot({
+      marks: [
+        // Ajoute les points du graphique, filtrés selon l'espèce choisie
+        Plot.dot(penguins, {
+          x: "culmen_length_mm", // Axe X : longueur du bec
+          y: "culmen_depth_mm", // Axe Y : profondeur du bec
+          stroke: "species", // Couleur selon l'espèce
+          filter: species ? (d) => d.species === species : null,
+        }),
+      ],
+    });
+    div!.append(plot);
+}
+selectSpecies.addEventListener("change", renderPlot);
+console.log(selectSpecies);
+renderPlot();
+
+
+
+</script>

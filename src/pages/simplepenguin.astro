@@ -1,0 +1,12 @@
+<div id="myplot"></div>
+
+<script>
+    
+import penguins from "../assets/penguins.json";
+import * as Plot from "@observablehq/plot";
+
+const plot = Plot.rectY(penguins, Plot.binX({y: "count"}, {x: "culmen_length_mm"})).plot();
+const div = document.querySelector("#myplot");
+div!.append(plot);
+
+</script>
