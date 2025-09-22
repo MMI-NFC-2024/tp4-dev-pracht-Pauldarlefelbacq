@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout>
+  <div id="myplot"></div>
+  <select name="name" id="name">
+      <option value="">Toutes les sortes</option>
+      <option value="Buffalo Chicken Pizza Small">Buffalo Chicken Pizza Small</option>
+      <option value="Meat Lover's Pizza Large">Meat Lover's Pizza Large</option>
+      <option value="Pepperoni Pizza Large">Pepperoni Pizza Large</option>
+  </select>
+
+  <select name="category" id="category">
+    <option value="">Toutes les catégories</option>
+    <option value="Classic">Classique</option>
+    <option value="Speciality">Spécialité</option>
+</select>
+</Layout>
+<script>
+
+import pizza from "../assets/pizza.json";
+import * as Plot from "@observablehq/plot";
+
+const selectType= document.querySelector('#name');
+console.log(selectType);
+const selectCat = document.querySelector("#category");
+
+function renderPlot(){
+    const name = selectType.value;
+    const cat = selectCat.value;
+    const div = document.querySelector("#myplot");
+    div.innerHTML = "";
+    const plot = Plot.plot({
+      marks: [
+        Plot.dot(pizza, {
+          x: "name",*
+          y: "price", 
+          stroke: "price",
+          filter: (d) => {
+            return (!name || d.name === name) &&
+            (!cat || d.category === cat);
+          }
+        }),
+      ],
+    });
+    div!.append(plot);
+}
+selectType.addEventListener("change", renderPlot);
+selectCat.addEventListener("change", renderPlot);
+console.log(selectType);
+renderPlot();
+
+
+
+</script>
