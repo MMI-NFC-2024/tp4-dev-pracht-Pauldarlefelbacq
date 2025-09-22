@@ -5,6 +5,20 @@
     <option value="Chinstrap">Chinstrap</option>
     <option value="Gentoo">Gentoo</option>
 </select>
+
+<select name="island" id="island">
+  <option value="">Toutes les îles</option>
+  <option value="Biscoe">Biscoe</option>
+  <option value="Dream">Dream</option>
+  <option value="Torgersen">Torgersen</option>
+</select>
+
+<select name="sex" id="sex">
+  <option value="">Tous les sexes</option>
+  <option value="MALE">Males</option>
+  <option value="FEMALE">Femelles</option>
+</select>
+
 <script>
 
 import penguins from "../assets/penguins.json";
@@ -12,25 +26,35 @@ import * as Plot from "@observablehq/plot";
 
 const selectSpecies= document.querySelector('#species');
 console.log(selectSpecies);
+const selectIsland = document.querySelector("#island");
+const selectSex = document.querySelector("#sex");
 
 function renderPlot(){
     const species = selectSpecies.value;
+    const island = selectIsland.value;
+    const sex = selectSex.value;
+
     const div = document.querySelector("#myplot");
     div.innerHTML = "";
     const plot = Plot.plot({
       marks: [
-        // Ajoute les points du graphique, filtrés selon l'espèce choisie
         Plot.dot(penguins, {
-          x: "culmen_length_mm", // Axe X : longueur du bec
-          y: "culmen_depth_mm", // Axe Y : profondeur du bec
-          stroke: "species", // Couleur selon l'espèce
-          filter: species ? (d) => d.species === species : null,
+          x: "culmen_length_mm",
+          y: "culmen_depth_mm",
+            stroke: "species",
+            filter: (d) => {
+            return (!species || d.species === species) && 
+                 (!island || d.island === island) && 
+                 (!sex || d.sex === sex);
+            },
         }),
       ],
     });
     div!.append(plot);
 }
 selectSpecies.addEventListener("change", renderPlot);
+selectIsland.addEventListener("change", renderPlot);
+selectSex.addEventListener("change", renderPlot);
 console.log(selectSpecies);
 renderPlot();
 
