@@ -1,24 +1,28 @@
-<div id="myplot"></div>
-<select name="species" id="species">
-    <option value="">Toutes les espèces</option>
-    <option value="Adelie">Adelie</option>
-    <option value="Chinstrap">Chinstrap</option>
-    <option value="Gentoo">Gentoo</option>
-</select>
+---
+import Layout from "../layouts/Layout.astro"
+---
+<Layout>
+  <div id="myplot"></div>
+  <select name="species" id="species">
+      <option value="">Toutes les espèces</option>
+      <option value="Adelie">Adelie</option>
+      <option value="Chinstrap">Chinstrap</option>
+      <option value="Gentoo">Gentoo</option>
+  </select>
 
-<select name="island" id="island">
-  <option value="">Toutes les îles</option>
-  <option value="Biscoe">Biscoe</option>
-  <option value="Dream">Dream</option>
-  <option value="Torgersen">Torgersen</option>
-</select>
+  <select name="island" id="island">
+    <option value="">Toutes les îles</option>
+    <option value="Biscoe">Biscoe</option>
+    <option value="Dream">Dream</option>
+    <option value="Torgersen">Torgersen</option>
+  </select>
 
-<select name="sex" id="sex">
-  <option value="">Tous les sexes</option>
-  <option value="MALE">Males</option>
-  <option value="FEMALE">Femelles</option>
-</select>
-
+  <select name="sex" id="sex">
+    <option value="">Tous les sexes</option>
+    <option value="MALE">Males</option>
+    <option value="FEMALE">Femelles</option>
+  </select>
+</Layout>
 <script>
 
 import penguins from "../assets/penguins.json";

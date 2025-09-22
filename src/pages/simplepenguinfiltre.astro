@@ -1,10 +1,15 @@
-<div id="myplot"></div>
-<select name="species" id="species">
-    <option value="">Toutes les espèces</option>
-    <option value="Adelie">Adelie</option>
-    <option value="Chinstrap">Chinstrap</option>
-    <option value="Gentoo">Gentoo</option>
-</select>
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout>
+  <div id="myplot"></div>
+  <select name="species" id="species">
+      <option value="">Toutes les espèces</option>
+      <option value="Adelie">Adelie</option>
+      <option value="Chinstrap">Chinstrap</option>
+      <option value="Gentoo">Gentoo</option>
+  </select>
+</Layout>
 <script>
 
 import penguins from "../assets/penguins.json";
